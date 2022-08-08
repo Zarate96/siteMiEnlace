@@ -1,7 +1,7 @@
 import os
 import dj_database_url
 from decouple import config
-from .base import *
+from miEnlace.settings.base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
