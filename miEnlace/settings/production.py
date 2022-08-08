@@ -11,7 +11,7 @@ ALLOWED_HOSTS = ['mienlacemexico.com']
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-SITE_URL = 'https://mienlacemexico.com.com.mx'
+SITE_URL = 'https://mienlacemexico.com'
 PROTOCOL_HTTP = 'https'
 
 DATABASES = {
