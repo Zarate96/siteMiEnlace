@@ -1,388 +1,475 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    {% if title %} 
-    <title>Enlace - {{title}}</title>
-    {% else %}
-    <title>MiEnlace</title>
-    {% endif %}
-
-    <!-- Favicons -->
-    <link href="{% static '/mienlace_images/logo_trans_enlace.png' %}" rel="icon">
-    <link href="{% static '/mienlace_images/logo_trans_enlace.png' %}" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MIENLACE es la alternativa más fácil, eficiente y económica de comprar suministros médicos, medicamentos y equipos sin importar en qué parte de México te encuentres.">
+  <link rel="canonical" href="https://mienlace.com">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MiEnlace - La plataforma de compras para el sector salud.">
+  <meta property="og:description" content="MIENLACE es la alternativa más fácil, eficiente y económica de comprar suministros médicos, medicamentos y equipos sin importar en qué parte de México te encuentres.">
+  <meta property="og:url" content="https://mienlace.com">
+  <meta property="og:site_name" content="MiEnlace - La plataforma de compras para el sector salud.">
+	<title>MiEnlace - La plataforma de compras para el sector salud.</title>
     <link href="{% static '/assets/vendor/aos/aos.css' %}" rel="stylesheet">
-    <link href="{% static '/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static '/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-    <link href="{% static '/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-    <link href="{% static '/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="{% static '/assets/css/style.css' %}" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: Imperial - v5.8.0
-    * Template URL: https://bootstrapmade.com/imperial-free-onepage-bootstrap-theme/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
-   
-    
+    <link rel="icon" href="{% static '/assets/img/icon.png' %}" type="image/png">
+    <link href="{% static '/assets/css/custom.css' %}" rel="stylesheet">
+    <link href="{% static '/node_modules/lity/dist/lity.min.css' %}" rel="stylesheet">
+    <link href="{% static '/node_modules/aos/dist/aos.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static '/node_modules/@pnotify/core/dist/PNotify.js' %}"></script>
+    <script src="{% static '/node_modules/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static '/node_modules/aos/dist/aos.js' %}"></script>
+  	<script src="{% static '/node_modules/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static '/node_modules/jquery-validation/dist/localization/messages_es.min.js' %}"></script>
 </head>
 
+<nav class="navbar navbar-expand-md bg-light" id="main">
+  <div class="container">
+    <a class="navbar-brand" href="#" data-aos="fade-right">
+    	<img src="{% static '/assets/img/logo.jpg' %}" alt="">
+    </a>
+    <button class="navbar-toggler custom_hamb" type="button" onclick="showMenu();">
+      <div></div>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown" data-aos="fade-left">
+      <button class="close" onclick="showMenu();">
+        <div></div>
+      </button>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" id="inicio__" aria-current="page" href="#" onclick="showMenu(this);">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link scrollTo" id="proceso__" href="#proceso" onclick="showMenu(this);">¿Cómo funciona?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link scrollTo" id="contacto__" href="#contacto" onclick="showMenu(this);">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link custom_btn2" target="_blank" href="https://mienlace.com.mx/">
+            <span>Regístrate</span>
+            <span>Regístrate</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <body>
-  
-  <!--End of Tawk.to Script-->
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" style="background: url({% static '/mienlace_images/fondo_enlace.png' %}) top center;">
-    <div class="hero-container" style="background: rgba(0, 0, 0, 0.1);">
-      <div data-aos="fade-in">
-        <div class="hero-logo">
-          <img class="" src="{% static '/mienlace_images/logo_enlace_3.png' %}" style="width: 26em; height: 22em;" alt="enlace">
-        </div>
 
-        <h1 style="color: #666666;">BIENVENIDO</h1>
-        <h2 style="color: #666666;">La plataforma digital <span class="typed" data-typed-items="de compras del sector salud que hace crecer tu negocio" style="color: #666666;"></span></h2>
-        <h3>Si quieres conocer como MIENLACE.COM.MX puede ayudarte a crecer tu negocio y mejorar tu rentabilidad, da click abajo si eres cliente o proveedor</h3>
-        <div class="actions">
-          <a href="#services" class="btn-get-started">Cliente</a>
-          <a href="#portfolio" class="btn-get-started">Proveedor</a>
-        </div>
-      </div>
-    </div>
-  </section><!-- End Hero -->
-  
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
+  <main>
 
-      <a href="{% url 'core:inicio' %}" class="logo mr-auto"><img src="{% static '/mienlace_images/text_enlace.png' %}" alt=""></a>
-      <!-- Uncomment below if you prefer to use a text logo -->
-      <!-- <h1 class="logo mr-auto"><a href="{% url 'core:inicio' %}">FLETESEGURO</a></h1> -->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
-          <li><a class="nav-link scrollto" href="#about">ENLACE</a></li>
-          <li><a class="nav-link scrollto" href="#services">Clientes</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Proveedores</a></li>
-          <!-- <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li> -->
-          <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
-          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li> -->
-          <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
-        </ul>
-        <!-- <i class="fas fa-bars mobile-nav-toggle"></i> -->
-        <i class="bi mobile-nav-toggle bi-list"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-  {% if messages %}
-    {% include 'core/includes/messages.html' %}
-  {% endif %} 
-  
-  <main id="main">
-
-    <!-- ======= FLETESEGURO Section ======= -->
-    <section id="about">
-      <div class="container" data-aos="fade-up">
-        <div class="row">
-          <div class="col-md-12">
-            <h3 class="section-title">Nosotros</h3>
-            <div class="section-title-divider"></div>
-            <p class="section-description">MIENLACE.COM.MX nace de la necesidad de las instituciones de salud privadas de contar con suministros médicos y medicamentos de todo tipo con oportunidad, optimizando costos y tiempos.</p>
-          </div>
-        </div>
-      </div>
-      <div class="container about-container" data-aos="fade-up" data-aos-delay="200">
-        <div class="row">
-
-          <div class="col-lg-6 about-img">
-            <img src="{% static '/mienlace_images/logo_trans_enlace.png' %}" alt="">
-          </div>
-
-          <div class="col-md-6 about-content">
-            <h2 class="about-title">ENLACE sincroniza oferta y demanda en el sector salud privado brindando enormes beneficios para sus usuarios.</h2>
-            <p class="about-text">
-              Es una plataforma única en su tipo que te brinda seguridad en tus transacciones, rapidez, eficiencia y economía.
-            </p>
-            <p class="about-text">
-              Utiliza el principio de inventarios distribuidos para garantizar disponibilidad, no importa dónde te ubiques o la localización del proveedor, nuestros acuerdos con las empresas de paquetería te garantizan el costo de envío más bajo en México.
-            </p>
-            <p class="about-text">
-              Es super conveniente, puedes utilizar todas las formas de pago, efectivo, tarjeta de crédito o transferencia bancaria, todos los pagos son procesados por un portal especializado con los más altos estándares de seguridad cibernética, para tu tranquilidad.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section><!-- End FLETESEGURO Section -->
-
-    <!-- ======= CLIENTES Section ======= -->
-    <section id="services">
+    <section class="position-relative" id="slide">
+      <img src="{% static '/assets/img/ENLACE_ilustracion.png' %}" alt="">
       <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-md-12">
-            <h3 class="section-title">Cliente</h3>
-            <div class="section-title-divider"></div>
-            <p class="section-description">La misión de <b>MIENLACE.COM.MX</b> es ser la alternativa de compra de suministros médicos más fácil y confiable del mercado, que te facilitará tu proceso de compra y te permitirá comprar a los mejores precios.</p>
-          </div>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="fas fa-american-sign-language-interpreting"></i></div>
-            <h4 class="service-title">FACILIDAD</h4>
-            <p class="service-description">
-              ¿ Tienes problemas para conseguir suministros médicos con oportunidad? Mienlace. com.mx te pone en contacto con cientos de proveedores a nivel nacional y sus inventarios están a tu disposición.
-            </p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="fas fa-shuttle-van"></i></div>
-            <h4 class="service-title">AHORROS</h4>
-            <p class="service-description">
-              ¿No compras a los mejores precios del mercado? La gran dispersión geográfica de clientes y proveedores en México provoca una gran variedad de precios al consumidor, siempre hay la posibilidad de comprar a un mejor precio, MIENLACE.COM.MX no tiene ningún costo, es completamente gratis.
-            </p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="fas fa-globe-americas"></i></div>
-            <h4 class="service-title">OPTIMIZACION</h4>
-            <p class="service-description">
-              ¿Tienes que solicitar múltiples cotizaciones para obtener lo que necesitas? Cuántas veces tienes que solicitar múltiples cotizaciones, esperar una eternidad para recibirlas y ver que están incompletas, con mienlace.com.mx no pierdes el tiempo, publicas tu solicitud, recibes múltiples cotizaciones y eliges los proveedores que tu quieras.
-            </p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="fas fa-lock"></i></div>
-            <h4 class="service-title">SEGURIDAD</h4>
-            <p class="service-description">
-              ¿ No te surten completo o a tiempo? El compromiso de mienlace.com.mx es entregarte todos tus pedidos completos todas las veces, en el plazo convenido. Tú eliges los precios¡
-            </p>
-          </div>
-          <!-- <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="fas fa-user-shield"></i></div>
-            <h4 class="service-title">Pago seguro</h4>
-            <p class="service-description">Todo el proceso está garantizado por FLETESEGURO, no tienes que tratar con diferentes personas, acordar pagos, perseguir evidencias, todo en un mismo lugar, FACIL Y SEGURO.</p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="fas fa-file-signature"></i></div>
-            <h4 class="service-title">Seguro de viaje</h4>
-            <p class="service-description">Si lo deseas puedes contratar un seguro contra robo para amparar tu mercancía, así tendrás tranquilidad para realizar tus entregas.</p>
-          </div> -->
-        </div>
-      </div>
-    </section>
-    <!-- End CLIENTES Section -->
-
-    <!-- ======= NEWSLETTER Section ======= -->
-    <section id="subscribe" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url({% static '/mienlace_images/DISTRIBUIDOR _VIAL.jpg' %}) fixed center center">
-      <div class="container" data-aos="fade-up">
         <div class="row">
-          <div class="col-md-8">
-            <h3 class="subscribe-title">Web App</h3>
-            <p class="subscribe-text">Si quieres regístrate en MIENLACE.COM.MX y comenzar a realizar sus beneficios por favor da click en el siguiente enlace</p>
-          </div>
-          <div class="col-md-4 subscribe-btn-container">
-            <a class="subscribe-btn" href="https://mienlace.com.mx/" target="_blank">IR A ENLACE</a>
-          </div>
-        </div>
-      </div>
-    </section><!-- End NEWSLETTER Section -->
-
-    <!-- ======= TRANSPORTISTAS Section ======= -->
-    <section id="portfolio">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-md-12">
-            <h3 class="section-title">PROVEEDORES</h3>
-            <div class="section-title-divider"></div>
-            <p class="section-description"><b>MIENLACE.COM.MX</b> es la respuesta para tus necesidades de crecimiento, te permite vender en todo México sin los pesados gastos asociados a la venta foránea.</p>
-          </div>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="bi bi-briefcase"></i></div>
-            <h4 class="service-title"><b>CONVENIENTE</b></h4>
-            <p class="service-description">
-              MIENLACE.COM.MX te pone en contacto con cientos de clientes a nivel nacional que ya están demandando productos, sólo revisa las solicitudes de cotización desde la comodidad de tu escritorio, cotiza los artículos que tienes en existencia para venta, estima las dimensiones del empaque y listo, tu propuesta será vista por el cliente.
-            </p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="bi bi-card-checklist"></i></div>
-            <h4 class="service-title"><b>GRAN POTENCIAL</b></h4>
-            <p class="service-description">
-              Los clientes en MIENLACE.COM.MX publican todos los días solicitudes de cotización de todo tipo de suministros médicos y medicamentos, de todas partes de la república, están a tu alcance en nuestra plataforma.
-            </p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="bi bi-bar-chart"></i></div>
-            <h4 class="service-title"><b>LA MEJOR PROPUESTA PARA CRECER</b></h4>
-            <p class="service-description">
-              Con MIENLACE.COM.MX no tienes los tremendos gastos de vendedores foráneos, bodegas, múltiples inventarios, personal administrativo, gastos de entrega en otras localidades, cobranza foránea (con el riesgo que conlleva), que casi siempre hacen que la expansión geográfica sea una propuesta muy cara y rara vez exitosa.
-            </p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="bi bi-binoculars"></i></div>
-            <h4 class="service-title"><b>PAGO ASEGURADO</b></h4>
-            <p class="service-description">
-              Si tu propuesta fue aceptada por un cliente, recibirás una orden de compra ENLACE y una solicitud de recolección para nuestro servicio de paquetería, prepara la orden, comunícanos las dimensiones del paquete y nuestros socios de paquetería recogerán el pedido en la fecha acordada (por favor incluye tu factura en el paquete), al recibir tu pedido, lo revisaremos contra nuestra OC, verificaremos que todo corresponda con tu factura y tendrás tu pago a los 8 días.
-            </p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="bi bi-brightness-high"></i></div>
-            <h4 class="service-title"><b>MERCADO SIN LIMITES</b></h4>
-            <p class="service-description">Todos los días incorporamos más clientes y proveedores a MIENLACE.COM.MX por lo que el crecimiento está asegurado, sin importar tu localización o la de los clientes tienes la posibilidad de vender, y con las tarifas preferenciales que hemos negociado con nuestros socios de paquetería los costos de envío nunca te sacarán del mercado.</p>
-          </div>
-          <div class="col-lg-4 col-md-6 service-item">
-            <div class="service-icon"><i class="bi bi-calendar4-week"></i></div>
-            <h4 class="service-title"><b>EL MEJOR TRATO</b></h4>
-            <p class="service-description">Registrarte en MIENLACE.COM.MX no tiene costo, es gratis, aprovecha la oportunidad de crecer tu negocio sin dolores de cabeza, MIENLACE.COM.MX te cobra una comisión únicamente si realizas una venta de productos, por lo que no arriesgas nada.
-              MIENLACE.COM.MX te ofrece servicios de valor agregado para que tengas la información de los artículos vendidos, sus precios, volúmenes, marcas, etc.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    </section>
-    <!-- End TRANSPORTISTAS Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact">
-      <div class="container" data-aos="fade-up">
-        <div class="row">
-          <div class="col-md-12">
-            <h3 class="section-title">Contactanos</h3>
-            <div class="section-title-divider"></div>
-            <p class="section-description">¿Quieres saber más o tienes dudas? Envíanos un mensaje y en breve nos comunicaremos contigo.</p>
-          </div>
-        </div>
-
-        <div class="row justify-content-center">
-          <div class="col-lg-3 col-md-4">
-            <div class="info">
-              <div>
-                <i class="bi bi-geo-alt"></i>
-                <p>CDMX<br>C. Gabriel Mancera 725, Col del Valle Centro, Benito Juárez, 03100 Ciudad de México</p>
-              </div>
-
-              <div>
-                <i class="bi bi-envelope"></i>
-                <p>contacto@fleteseguro.com.mx</p>
-              </div>
-
-              <div>
-                <i class="bi bi-phone"></i>
-                <p>+52 55 56392735</p>
-              </div>
-
+          <div class="col-12 col-lg-8 col-xl-6">
+            <h1 data-aos="fade-up-right" data-aos-delay="100">La plataforma de compras para el sector salud.</h1>
+            <p data-aos="fade-up-right" data-aos-delay="200">MIENLACE es la alternativa más fácil, eficiente y económica de comprar suministros médicos, medicamentos y equipos sin importar en qué parte de México te encuentres.</p>
+            <p data-aos="fade-up-right" data-aos-delay="300" data-aos-offset="-300">¡Transforma tu manera de comprar!</p>
+            <div data-aos="fade-up-right" data-aos-delay="400" data-aos-offset="-300">
+              <a href="#proceso" class="custom_btn blue_ me-2 scrollTo">
+                <span>Descubre MiEnlace</span>
+                <span>Descubre MiEnlace</span>
+              </a>
+              <a href="#contacto" class="custom_btn light_ scrollTo">
+                <span>Contáctanos</span>
+                <span>Contáctanos</span>
+              </a>
             </div>
           </div>
-
-          <div class="col-lg-5 col-md-8">
-            <div class="form">
-              <form action="{% url 'core:mensaje' %}" method="post" id="contactForm">
-                {% csrf_token %}
-                <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" required>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="text" name="telefono" class="form-control" id="telefono" placeholder="Teléfono" required>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Motivo" required>
-                </div>
-                <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
-                </div>
-                <script src="https://www.google.com/recaptcha/api.js"></script>
-                <div class="g-recaptcha ml-3 mt-3" data-sitekey="{{google_site_key}}"></div>
-                <div class="mt-3"><button type="submit" class="btn btn-primary">Enviar mensaje</button></div>
-              </form>
-            </div>
-          </div>
-
         </div>
       </div>
-    </section><!-- End Contact Section -->
+    </section>
 
-  </main><!-- End #main -->
+    <section class="py-6 bg-blue_01 block_ctrl" id="proceso">
+      <div class="container">
+        <h3 class="block_ctrl h1 text-blue_02 pb-5">Simplificamos el proceso de compra de insumos médicos para clínicas, hospitales e instituciones de salud privadas.</h3>
+        <div class="block_ctrl">
+          <div class="row w-100 m-0 justify-content-center align-items-center square_item">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="100">
+                <img src="{% static '/assets/img/A1.svg' %}" alt="">
+                <p>Crea una cuenta y registra la clínica, hospital o laboratorio que representas.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="300">
+                <img src="{% static '/assets/img/A2.svg' %}" alt="">
+                <p>Solicita los insumos que necesites. Recibe cotizaciones de proveedores de todo México.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="500">
+                <img src="{% static '/assets/img/A3.svg' %}" alt="">
+                <p>Elige la mejor oferta y paga de forma segura con efectivo, tarjeta o transferencia bancaria.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="700">
+                <img src="{% static '/assets/img/A4.svg' %}" alt="">
+                <p>Recibe tu pedido a domicilio en tiempo y forma. Obtén el mejor costo de envío.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+    <section class="block_ctrl py-6" id="video">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12 col-lg-6" data-aos="fade-up-right" data-aos-delay="0">
+            <div class="video">
+              <img src="{% static '/assets/img/video_thumb.jpg' %}" alt="">
+              <a href="{% static 'video.mp4' %}" data-lity>
+                <img src="{% static './assets/img/play.png' %}" alt="">
+              </a>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 text-center text_" data-aos="fade-up-left" data-aos-delay="0">
+            <img src="{% static '/assets/img/logo.jpg' %}" alt="" class="mb-4 d-none d-lg-inline-block">
+            <div class="h4 text-blue_02 bg-blue_01">
+              Adquiere tus suministros médicos de forma inteligente y libérate del tedioso proceso de compras con <strong>MIENLACE</strong>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block_ctrl py-6" id="por-que">
+      <div class="container">
+        <h3 class="block_ctrl text-center h1 text-blue_02 pb-5">¿Por qué usar ENLACE?</h3>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    No tiene costo
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Usar MIENLACE no tiene costo. Solo regístrate y disfruta sus beneficios</p>
+                  </div>
+                </div>
+                <img src="{% static '/assets/img/C1.svg' %}" alt="">
+              </div>
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Disponible 24/7
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Haz tu requerimiento en cualquier momento desde PC, Tablet o celular. Es muy fácil</p>
+                  </div>
+                </div>
+                <img src="{% static '/assets/img/C2.svg' %}" alt="">
+              </div>
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Sin mínimo de compra
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Solicita solo los insumos que necesites</p>
+                  </div>
+                </div>
+                <img src="{% static '/assets/img/C3.svg' %}" alt="">
+              </div>
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="accordion-header" id="headingFour">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Compra a los mejores precios
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Recibe múltiples cotizaciones de proveedores de todo México. Elige el mejor precio del mercado</p>
+                  </div>
+                </div>
+                <img src="{% static '/assets/img/C4.svg' %}" alt="">
+              </div>
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+                <h2 class="accordion-header" id="headingFive">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Envío seguro y al mejor costo
+                  </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Nuestros convenios con proveedores logísticos te garantizan el mejor costo de envío</p>
+                  </div>
+                </div>
+                <img src="{% static '/assets/img/C5.svg' %}" alt="">
+              </div>
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
+                <h2 class="accordion-header" id="headingSix">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    Es seguro de usar
+                  </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>Todos los pagos son procesados a través de un portal especializado, cumpliendo con todos los estándares de ciberseguridad.</p>
+                  </div>
+                </div>
+                <img src="{% static '/assets/img/C6.svg' %}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row w-100 m-0 justify-content-center align-items-center">
+          <div class="col-auto pt-4">
+            <a href="" class="custom_btn blue_" style="width: 230px !important;">
+              <span>Registrate en MiEnlace</span>
+              <span>Registrate en MiEnlace</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block_ctrl pt-0 pb-0 pt-md-6 pb-md-6" id="contacto">
+      <div class="container pb-0 pt-0 pb-md-5 pt-md-4">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12 col-sm-10 col-md-6 py-4 py-md-0" data-aos="fade-up-right" data-aos-delay="0">
+            <p class="h4 block_ctrl text-light sm_blue text-center pb-4">¿Quieres más información? Deja tus datos y nos pondremos en contacto contigo.</p>
+            <form class="block_ctrl" id="cta">
+              <div class="form-floating my-4 p-0">
+                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" data-rule-required="true">
+                <label for="nombre">Nombre</label>
+              </div>
+              <div class="form-floating my-4 p-0">
+                <input type="text" class="form-control" name="empresa" id="empresa" placeholder="Empresa">
+                <label for="empresa">Empresa</label>
+              </div>
+              <div class="form-floating my-4 p-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Correo electrónico" data-rule-required="true">
+                <label for="email">Correo electrónico</label>
+              </div>
+              <div class="form-floating mt-4 p-0">
+                <textarea class="form-control" name="mensaje" placeholder="¿Qué te gustaría saber?" id="mensaje" style="height: 100px"></textarea>
+                <label for="mensaje">¿Qué te gustaría saber?</label>
+              </div>
+              <button type="submit" class="custom_btn light_invert_" style="width: 230px !important;">
+                <span>Enviar</span>
+                <span>Enviar</span>
+              </button>
+            </form>
+          </div>
+          <div class="col-12 col-md-6 info_contact py-4 py-md-0 mt-3 mt-md-0" data-aos="fade-up-left" data-aos-delay="0">
+            <p class="h4 block_ctrl text-light text-center pb-4">Contacto</p>
+            <div class="row w-100 m-0 justify-content-center align-items-center">
+              <div class="col-12 col-sm-10 col-md-8 col-lg-7">
+                <div class="block_ctrl contact_info">
+                  <a href="tel:+525556392735">
+                    <img src="{% static './assets/img/B1.svg' %}" alt="teléfono MiEnlace">
+                    <span>55 5639 2735</span>
+                  </a>
+                  <a href="mailto:contacto@endicom.com.mx">
+                    <img src="{% static './assets/img/B2.svg' %}" alt="email MiEnlace">
+                    <span>contacto@endicom.com.mx</span>
+                  </a>
+                  <a href="https://goo.gl/maps/BcuqxiLFWAcRhpaQ6" target="_blank">
+                    <img src="{% static '/assets/img/B3.svg' %}" alt="ubicación MiEnlace">
+                    <span>Gabriel Mancera 725, col. del Valle Centro, Benito Juárez, 03100 Ciudad de México.</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>  
+
+  </main>
+
+  <footer class="block_ctrl py-4">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="copyright">
-            &copy; Copyright <strong>Endicom</strong>. Todos lo derechos reservsados.
+      <div class="row justify-content-center align-items-center flex-md-row-reverse">
+        <div class="col-12 col-md-6 text-left text-md-center">
+          <span class="text-blue_03">Todos los derechos reservados.</span>
+        </div>
+        <div class="col-12 col-md-6 text-left text-md-center">
+          <div class="block_ctrl">
+            <a href="privacidad.html">Aviso de privacidad</a>
           </div>
-          <div class="credits">
-            <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Imperial
-          -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          <div class="block_ctrl">
+            <a href="#contacto" class="scrollTo">Contacto</a>
           </div>
         </div>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></a>
+  <button class="arrow_down_up" onclick="scrollFnSections(this);">
+    <img src="{% static '/assets/img/down.svg' %}" alt="">
+  </button>
 
-  <!-- Vendor JS Files -->
-  <script src="{% static '/assets/vendor/aos/aos.js' %}"></script>
-  <script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/typed.js/typed.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/php-email-form/validate.js' %}"></script>
-  <script src="https://kit.fontawesome.com/a310f58f3b.js" crossorigin="anonymous"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static '/assets/js/main.js' %}"></script>
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/62fe8e6a37898912e963d5d3/1gap5ojol';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-  </script>
-  <!--End of Tawk.to Script-->
 </body>
 
+  <link href="{% static '/node_modules/@pnotify/core/dist/PNotify.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static '/node_modules/@pnotify/core/dist/BrightTheme.css' %}" rel="stylesheet" type="text/css" />
+  <script src="{% static '/node_modules/lity/dist/lity.min.js' %}"></script>
+	<script src="{% static '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script>
+
+
+  var element_00 = $('#slide').offset().top;
+  element_00 = element_00;
+  var element_01 = $('#proceso').offset().top;
+  element_01 = element_01;
+  var element_02 = $('#video').offset().top;
+  element_02 = element_02;
+  var element_03 = $('#por-que').offset().top;
+  element_03 = element_03;
+  var element_04 = $('#contacto').offset().top;
+  element_04 = element_04;
+
+  var menu_nav = document.getElementById("main");
+
+  $(function() {
+      classOnScroll();
+      AOS.init({disable: 'mobile'});
+      $(window).scroll(function() {
+        classOnScroll();
+      });
+      $("a.scrollTo").click(function(e) {
+          e.preventDefault();
+          var objetive = $(this).attr("href");
+          $('html, body').animate({
+              scrollTop: $(objetive).offset().top-105
+          }, 0);
+      });
+  });
+
+  function classOnScroll(){
+    if ($(window).scrollTop() > 0) {
+       $(menu_nav).addClass('scrolled');
+    } else {
+       $(menu_nav).removeClass('scrolled');
+    }
+    if ($(window).scrollTop() > element_04 - $('#contacto').height()) {
+      $('.arrow_down_up').addClass('toUp');
+    }else{
+      $('.arrow_down_up').removeClass('toUp');
+    }
+    if ($(window).scrollTop() > element_04-107) {
+      $('ul.navbar-nav a.nav-link').removeClass('active');
+      $('a.nav-link#contacto__').addClass('active');
+    }else if($(window).scrollTop() > element_01-107){
+      $('ul.navbar-nav a.nav-link').removeClass('active');
+      $('a.nav-link#proceso__').addClass('active');
+    }else{
+      $('ul.navbar-nav a.nav-link').removeClass('active');
+      $('a.nav-link#inicio__').addClass('active');
+    }
+  }
+
+  function showMenu(e){
+    menu_nav.classList.toggle("show_mov");
+  }
+
+  function scrollFnSections(e){
+    if ($(e).hasClass('toUp')) {
+      window.location.hash = '';
+      $('html, body').scrollTop($('html').offset().top);
+    }else{
+      var scroll = $(window).scrollTop();
+      if (scroll<=element_00) {
+          window.location.hash = '#proceso';
+          $('html, body').scrollTop($('#proceso').offset().top-105);
+      }else if (scroll<=element_01) {
+          window.location.hash = '#video';
+          $('html, body').scrollTop($('#video').offset().top-105);
+      }else if (scroll<=element_02) {
+          window.location.hash = '#por-que';
+          $('html, body').scrollTop($('#por-que').offset().top-105);
+      }else{
+          window.location.hash = '#contacto';
+          $('html, body').scrollTop($('#contacto').offset().top-105);
+      }
+    }
+  }
+
+  var form = $('form#cta');
+  form.validate({
+      errorElement: 'span',
+  });
+  form.submit(function(e) {
+      e.preventDefault();
+      if ($(this).valid()) {
+          send($(this));
+      }else{
+          console.log('No es valido');
+      }
+  });
+  function send(form){
+      var formData = new FormData($(form)[0]);
+      $.ajax({
+          url: '/assets/library/EnviarCorreo.php',
+          type: 'POST',
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          beforeSend: function(){
+            $(form).addClass('disabled');
+            var notice_;
+            window.notice_ = PNotify.alert({
+              title: "Enviando",
+              text: "Espere un momento",
+              type: 'info',
+              icon: 'fa fa-spinner fa-spin',
+              hide: false,
+              theme: 'defaultTheme',
+              maxVisible: 1,
+              killer: true,
+              buttons: {
+                  closer: false,
+                  sticker: false
+              },
+              shadow: false
+            });
+          },
+          success: function(data){
+            var options = {};
+              $(form)[0].reset();
+              options.title = 'Mensaje enviado';
+              options.text = 'En breve un asesor se comunicará contigo';
+              options.type = 'success';
+              options.hide = true;
+              options.buttons = {
+                  closer: true
+              };
+              options.icon = 'fa fa-check';
+              window.notice_.update(options);
+          },
+          error: function(data){
+            var options = {};
+              options.title = 'Ocurrio un problema';
+              options.text = 'Intentalo mas tarde';
+              options.type = 'error';
+              options.hide = true;
+              options.buttons = {
+                closer: true
+              };
+              options.icon = 'fa fa-exclamation-triangle';
+              window.notice_.update(options);
+          },
+          complete: function() {
+            $(form).removeClass('disabled');
+          }
+      });
+  }
+  </script>
 </html>
