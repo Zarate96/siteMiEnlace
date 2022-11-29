@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Mensajes, Newsletter
 
 class MensajestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nombre', 'email', 'asunto', 'is_answered')
+    list_display = ('id', 'nombre', 'email', 'mensaje', 'is_answered')
     search_fields = ('nombre', 'email')
     list_per_page = 10
 

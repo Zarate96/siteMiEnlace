@@ -59,7 +59,7 @@
 </nav>
 
 <body>
-
+   
   <main>
 
     <section class="position-relative" id="slide">
@@ -84,7 +84,9 @@
         </div>
       </div>
     </section>
-
+    {% if messages %}
+       {% include 'core/includes/messages.html' %}
+   {% endif %} 
     <section class="py-6 bg-blue_01 block_ctrl" id="proceso">
       <div class="container">
         <h3 class="block_ctrl h1 text-blue_02 pb-5">Simplificamos el proceso de compra de insumos médicos para clínicas, hospitales e instituciones de salud privadas.</h3>
@@ -243,7 +245,8 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-12 col-sm-10 col-md-6 py-4 py-md-0" data-aos="fade-up-right" data-aos-delay="0">
             <p class="h4 block_ctrl text-light sm_blue text-center pb-4">¿Quieres más información? Deja tus datos y nos pondremos en contacto contigo.</p>
-            <form class="block_ctrl" id="cta">
+            <form action="{% url 'core:mensaje' %}" method="post" class="block_ctrl" id="cta">
+              {% csrf_token %}
               <div class="form-floating my-4 p-0">
                 <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" data-rule-required="true">
                 <label for="nombre">Nombre</label>
@@ -260,6 +263,8 @@
                 <textarea class="form-control" name="mensaje" placeholder="¿Qué te gustaría saber?" id="mensaje" style="height: 100px"></textarea>
                 <label for="mensaje">¿Qué te gustaría saber?</label>
               </div>
+              <script src="https://www.google.com/recaptcha/api.js"></script>
+              <div class="g-recaptcha ml-3 mt-3" data-sitekey="{{google_site_key}}"></div>
               <button type="submit" class="custom_btn light_invert_" style="width: 230px !important;">
                 <span>Enviar</span>
                 <span>Enviar</span>
@@ -399,77 +404,6 @@
           $('html, body').scrollTop($('#contacto').offset().top-105);
       }
     }
-  }
-
-  var form = $('form#cta');
-  form.validate({
-      errorElement: 'span',
-  });
-  form.submit(function(e) {
-      e.preventDefault();
-      if ($(this).valid()) {
-          send($(this));
-      }else{
-          console.log('No es valido');
-      }
-  });
-  function send(form){
-      var formData = new FormData($(form)[0]);
-      $.ajax({
-          url: '/assets/library/EnviarCorreo.php',
-          type: 'POST',
-          data: formData,
-          cache: false,
-          contentType: false,
-          processData: false,
-          beforeSend: function(){
-            $(form).addClass('disabled');
-            var notice_;
-            window.notice_ = PNotify.alert({
-              title: "Enviando",
-              text: "Espere un momento",
-              type: 'info',
-              icon: 'fa fa-spinner fa-spin',
-              hide: false,
-              theme: 'defaultTheme',
-              maxVisible: 1,
-              killer: true,
-              buttons: {
-                  closer: false,
-                  sticker: false
-              },
-              shadow: false
-            });
-          },
-          success: function(data){
-            var options = {};
-              $(form)[0].reset();
-              options.title = 'Mensaje enviado';
-              options.text = 'En breve un asesor se comunicará contigo';
-              options.type = 'success';
-              options.hide = true;
-              options.buttons = {
-                  closer: true
-              };
-              options.icon = 'fa fa-check';
-              window.notice_.update(options);
-          },
-          error: function(data){
-            var options = {};
-              options.title = 'Ocurrio un problema';
-              options.text = 'Intentalo mas tarde';
-              options.type = 'error';
-              options.hide = true;
-              options.buttons = {
-                closer: true
-              };
-              options.icon = 'fa fa-exclamation-triangle';
-              window.notice_.update(options);
-          },
-          complete: function() {
-            $(form).removeClass('disabled');
-          }
-      });
   }
   </script>
 </html>

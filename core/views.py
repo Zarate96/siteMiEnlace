@@ -24,14 +24,13 @@ class Inicio(UserPassesTestMixin, TemplateView):
 @check_recaptcha
 def mensaje(request):
     if request.method == 'POST':
-        name = request.POST['name']
+        nombre = request.POST['nombre']
+        empresa = request.POST['empresa']
         email = request.POST['email']
-        subject = request.POST['subject']
-        message = request.POST['message']
-        telefono = request.POST['telefono']
+        mensaje = request.POST['mensaje']
 
     if request.recaptcha_is_valid:    
-        mensaje = Mensajes(nombre=name, email=email, asunto=subject, mensaje=message, telefono=telefono)
+        mensaje = Mensajes(nombre=nombre, empresa=empresa, email=email, mensaje=mensaje)
         mensaje.save()
         messages.success(request, 'Tu mensaje ha sido enviado, nos pondremos en contacto contigo en breve.')
 

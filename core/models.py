@@ -15,11 +15,10 @@ class Newsletter(models.Model):
 
 class Mensajes(models.Model):
     nombre = models.CharField(max_length=100)
+    empresa = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
-    telefono = models.CharField(max_length=100)
-    fecha = models.DateTimeField(default=timezone.now)
-    asunto = models.CharField(max_length=100)
     mensaje = models.TextField(blank=True)
+    fecha = models.DateTimeField(default=timezone.now)
     is_answered = models.BooleanField(default=False)
 
     class Meta:
