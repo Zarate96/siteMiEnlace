@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     #My_apps
     'core.apps.CoreConfig',
+    'crm.apps.CrmConfig',
 
      #Third_apps
     'storages',
