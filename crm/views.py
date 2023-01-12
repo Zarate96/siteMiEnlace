@@ -34,15 +34,19 @@ class Crm(TemplateView):
         return True
         
     def get_context_data(self, *args, **kwargs):
-
         mydb = mysql.connector.connect(
             host='mienlace.com.mx',
             database='test',
             user='omnipet',
             password='omnipet1524'
         )
-
-        print(mydb)
+        mycursor = mydb.cursor()
+        mycursor.execute("select id, userName, activo, nombre, apellidopaterno, apellidomaterno, email,isPersonaFisica, idEstado, ciudad, lada, celular from enlace_test.usuarios")
+        myresult = mycursor.fetchall()
+        print(type(myresult))
+        for x in myresult:
+            print(type(x))
         context = super().get_context_data(*args,**kwargs)
         context['title'] = 'Inicio'
+        context['usuarios'] = myresult
         return context
