@@ -27,11 +27,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 
-class Crm(TemplateView):
+class Crm(UserPassesTestMixin, TemplateView):
     template_name = 'crm/baseCrm.html'
 
     def test_func(self):
-        return True
+        return self.request.user.is_superuser
         
     def get_context_data(self, *args, **kwargs):
         mydb = mysql.connector.connect(
