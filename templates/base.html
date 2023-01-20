@@ -14,6 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="MIENLACE es la alternativa más fácil, eficiente y económica de comprar suministros médicos, medicamentos y equipos sin importar en qué parte de México te encuentres.">
   <link rel="canonical" href="https://mienlace.com">
+  <meta name="facebook-domain-verification" content="e3tij8rbc984ys0d5jtpkzllgj2dja" />
   <meta property="og:locale" content="es">
   <meta property="og:type" content="website">
   <meta property="og:title" content="MiEnlace - La plataforma de compras para el sector salud.">
@@ -79,8 +80,8 @@
       <div class="container">
         <div class="row">
           <div class="col-12 col-lg-8 col-xl-6">
-            <h1 data-aos="fade-up-right" data-aos-delay="100">La plataforma de compras para el sector salud.</h1>
-            <p data-aos="fade-up-right" data-aos-delay="200">MIENLACE es la alternativa más fácil, eficiente y económica de comprar suministros médicos, medicamentos y equipos sin importar en qué parte de México te encuentres.</p>
+            <h1 data-aos="fade-up-right" data-aos-delay="100">Transforma tu manera de comprar suministros médicos.</h1>
+            <p data-aos="fade-up-right" data-aos-delay="200">MIENLACE es la plataforma diseñada para que clínicas y hospitales compren medicamentos, suministros y equipo médico de forma inteligente.</p>
             <p data-aos="fade-up-right" data-aos-delay="300" data-aos-offset="-300">¡Transforma tu manera de comprar!</p>
             <div data-aos="fade-up-right" data-aos-delay="400" data-aos-offset="-300">
               <a href="#proceso" class="custom_btn blue_ me-2 scrollTo">
@@ -97,44 +98,12 @@
       </div>
     </section>
     {% if messages %}
-       {% include 'core/includes/messages.html' %}
-   {% endif %} 
-    <section class="py-6 bg-blue_01 block_ctrl" id="proceso">
+      {% include 'core/includes/messages.html' %}
+    {% endif %} 
+  
+    <section class="py-6 bg-blue_01 block_ctrl" id="video">
       <div class="container">
-        <h3 class="block_ctrl h1 text-blue_02 pb-5">Simplificamos el proceso de compra de insumos médicos para clínicas, hospitales e instituciones de salud privadas.</h3>
-        <div class="block_ctrl">
-          <div class="row w-100 m-0 justify-content-center align-items-center square_item">
-            <div class="col-12 col-md-6 col-lg-3">
-              <div data-aos="fade-up-left" data-aos-delay="100">
-                <img src="{% static '/assets/img/A1.svg' %}" alt="">
-                <p>Crea una cuenta y registra la clínica, hospital o laboratorio que representas.</p>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-              <div data-aos="fade-up-left" data-aos-delay="300">
-                <img src="{% static '/assets/img/A2.svg' %}" alt="">
-                <p>Solicita los insumos que necesites. Recibe cotizaciones de proveedores de todo México.</p>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-              <div data-aos="fade-up-left" data-aos-delay="500">
-                <img src="{% static '/assets/img/A3.svg' %}" alt="">
-                <p>Elige la mejor oferta y paga de forma segura con efectivo, tarjeta o transferencia bancaria.</p>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-              <div data-aos="fade-up-left" data-aos-delay="700">
-                <img src="{% static '/assets/img/A4.svg' %}" alt="">
-                <p>Recibe tu pedido a domicilio en tiempo y forma. Obtén el mejor costo de envío.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="block_ctrl py-6" id="video">
-      <div class="container">
+        <h3 class="block_ctrl text-center h1 text-blue_02 pb-5">Mira el video y conoce MI ENLACE</h3>
         <div class="row justify-content-center align-items-center">
           <div class="col-12 col-lg-6" data-aos="fade-up-right" data-aos-delay="0">
             <div class="video">
@@ -142,12 +111,6 @@
               <a href="{% static 'video.mp4' %}" data-lity>
                 <img src="{% static './assets/img/play.png' %}" alt="">
               </a>
-            </div>
-          </div>
-          <div class="col-12 col-lg-6 text-center text_" data-aos="fade-up-left" data-aos-delay="0">
-            <img src="{% static '/assets/img/logo.jpg' %}" alt="" class="mb-4 d-none d-lg-inline-block">
-            <div class="h4 text-blue_02 bg-blue_01">
-              Adquiere tus suministros médicos de forma inteligente y libérate del tedioso proceso de compras con <strong>MIENLACE</strong>.
             </div>
           </div>
         </div>
@@ -251,6 +214,52 @@
         </div>
       </div>
     </section>
+    
+    <section class="py-6 bg-blue_01 block_ctrl" id="proceso">
+      <div class="container">
+        <h3 class="block_ctrl h1 text-blue_02 pb-5">Simplificamos el proceso de compra de insumos médicos para clínicas, hospitales e instituciones de salud privadas.</h3>
+        <div class="block_ctrl">
+          <div class="row w-100 m-0 justify-content-center align-items-center square_item">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="100">
+                <img src="{% static '/assets/img/A1.svg' %}" alt="">
+                <p>Crea una cuenta y registra la clínica, hospital o laboratorio que representas.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="300">
+                <img src="{% static '/assets/img/A2.svg' %}" alt="">
+                <p>Solicita los insumos que necesites. Recibe cotizaciones de proveedores de todo México.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="500">
+                <img src="{% static '/assets/img/A3.svg' %}" alt="">
+                <p>Elige la mejor oferta y paga de forma segura con efectivo, tarjeta o transferencia bancaria.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div data-aos="fade-up-left" data-aos-delay="700">
+                <img src="{% static '/assets/img/A4.svg' %}" alt="">
+                <p>Recibe tu pedido a domicilio en tiempo y forma. Obtén el mejor costo de envío.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block_ctrl py-6" id="por-que">
+      <div class="container">
+        <h3 class="block_ctrl text-center h1 text-blue_02 pb-5">Algunos usuarios que ya utilizan MIENLACE</h3>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <img src="{% static '/assets/img/logosPlataformas.svg' %}" alt="">
+          </div>
+        </div>
+        
+      </div>
+    </section>
 
     <section class="block_ctrl pt-0 pb-0 pt-md-6 pb-md-6" id="contacto">
       <div class="container pb-0 pt-0 pb-md-5 pt-md-4">
@@ -308,6 +317,7 @@
       </div>
     </section>  
 
+    
   </main>
 
   <footer class="block_ctrl py-4">
