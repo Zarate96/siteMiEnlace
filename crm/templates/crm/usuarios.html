@@ -1,0 +1,68 @@
+{% extends 'crm/baseCrm.html' %}
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+    <!-- Main row -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Usuarios</h3>
+
+                <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="input-group-append">
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Username</th>
+                      <th>Nombre</th>
+                      <th>Apellido Paterno</th>
+                      <th>Correo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% if usuarios %}
+                          {% for usuario in usuarios %}
+                          <tr>
+                              <td>{{usuario.0}}</td>
+                              <td>{{usuario.1}}</td>
+                              <td>{{usuario.3}}</td>
+                              <td><span class="tag tag-success">{{usuario.4}}</span></td>
+                              <td>{{usuario.6}}</td>
+                          </tr>
+                          {% endfor %}
+                      {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-8 connectedSortable">
+        <!-- Custom tabs (Charts with tabs)-->
+        
+        <!-- /.card -->
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-4 connectedSortable">
+
+        </section>
+        <!-- right col -->
+    </div>
+    <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+{% endblock %}

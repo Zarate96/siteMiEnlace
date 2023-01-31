@@ -1,0 +1,99 @@
+{% extends 'crm/baseCrm.html' %}
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+    <!-- Main row -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-info">
+                <div class="card-header">
+                  <h3 class="card-title">OCC</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                <!-- form start -->
+                <div class="form-group">
+                  </div>
+                    <form action="{% url 'crm:costo-envio-occ' %}" method="post" id="costoEnvioOcc">
+                        {% csrf_token %}
+                        <div class="input-group input-group">
+                            <input type="text" class="form-control" name="occ" id="occ" required>
+                            <span class="input-group-append">
+                            <button type="submit" class="btn btn-info btn-flat">Buscar</button>
+                            </span>
+                        </div>
+                    <!-- /.card-body -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% if messages %}
+            {% include 'crm/includes/messages.html' %}
+        {% endif %} 
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Usuarios</h3>
+
+                <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="input-group-append">
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>OCC Folio</th>
+                        <th>Fecha Alta</th>
+                        <th>Estatus</th>
+                        <th>Pagada</th>
+                        <th>row</th>
+                        <th>row</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% if result %}
+                            {% for row in result %}
+                            <tr>
+                                <td>{{row.0}}</td>
+                                <td>{{row.1}}</td>
+                                <td>{{row.2}}</td>
+                                <td><span class="tag tag-success">{{row.3}}</span></td>
+                                <td>{{row.4}}</td>
+                                <td>{{row.5}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                  </table>
+                
+              </div>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-8 connectedSortable">
+        <!-- Custom tabs (Charts with tabs)-->
+        
+        <!-- /.card -->
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-4 connectedSortable">
+
+        </section>
+        <!-- right col -->
+    </div>
+    <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+{% endblock %}
