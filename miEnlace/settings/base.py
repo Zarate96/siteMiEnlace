@@ -146,3 +146,10 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 #GOOGLE RECAPTCHA
 GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY', default='')
 GOOGLE_RECAPTCHA_SITE_KEY = config('GOOGLE_RECAPTCHA_SITE_KEY', default='')
+
+#CRM DATABASE CONFIG
+DB_CRM_NAME = config('DB_CRM_NAME', default='')
+DB_CRM_USER = config('DB_CRM_USER', default='')
+DB_CRM_PASSWORD = config('DB_CRM_PASSWORD', default='')
+DB_CRM_HOST = config('DB_CRM_HOST', default='')
+DB_CRM_PORT = config('DB_CRM_PORT', default='')

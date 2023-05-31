@@ -10,4 +10,5 @@ urlpatterns = [
     path('solicitudes/', Solicitudes.as_view(), name='solicitudes'),
     path('occ-cliente/', occ_cliente, name='occ-cliente'),
     path('occ-costo-envio/', costo_envio_occ, name='costo-envio-occ'),
+    path('test/', Test.as_view(), name='test'),
 ]
