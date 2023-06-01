@@ -54,9 +54,8 @@ class Test(UserPassesTestMixin, TemplateView):
                                     left JOIN enlace.USUARIOS USR ON USR.ID = COD.IDUSUARIO
                                     WHERE  SOL.status = 'confirmada'
                                     and CONCAT('OCC' , SOL.folio) = 'OCCSANATORIO0034';""")
-        query2 = db.excute_query("""select id, userName, nombre, apellidopaterno, apellidomaterno, email,isPersonaFisica, 
-                                    idEstado, ciudad, lada, celular from enlace.usuarios 
-                                    WHERE userName='Sanatorio';""")
+        query2 = db.excute_query("""select * from enlace.usuarios 
+                                    WHERE id='189';""")
         query3 = db.excute_query("""select * from enlace.datosfiscales
                                     WHERE idUsuario='189';""")
         db.disconnect()
@@ -124,30 +123,64 @@ def costo_envio_occ(request):
         "result":query,
     }
     return render(request, 'crm/costo_envio_occ.html', context)
-
+'%{username}%'
 def facturacion_cliente(request):
-    query = ""
+    #OCCSANATORIO0034
+    #189
     if request.method == 'POST':
         occ = request.POST['occ']
-        solicitud = request.POST['solicitud']
+        idUsuario = request.POST['idUsuario']
         try:
             query = db.excute_query(f"""select  CONCAT( 'OCC',SOL.FOLIO) OCC_FOLIO, USR.username Proveedor,
-                                SOD.partida,
-                                COD.descripcion, COD.marca, COD.empaque, COD.cantidad, COD.precioUnitario, COD.precioExtendido, COD.iva
-                                from enlace.solicitudes SOL 
-                                inner join enlace.solicituddetalle SOD on SOL.id = SOD.idSolicitud
-                                inner join enlace.cotizaciondetalle COD on COD.ID = SOD.idCotizacionDetalle
-                                left JOIN ENLACE.USUARIOS USR ON USR.ID = COD.IDUSUARIO
-                                WHERE  SOL.status = 'confirmada'
-                                and CONCAT('OCC' , SOL.folio) = 'OCCDRA MAGALLON002';'""")
+                                    SOD.partida,
+                                    COD.descripcion, COD.marca, COD.empaque, COD.cantidad, COD.precioUnitario, COD.precioExtendido, COD.iva
+                                    from enlace.solicitudes SOL 
+                                    inner join enlace.solicituddetalle SOD on SOL.id = SOD.idSolicitud
+                                    inner join enlace.cotizaciondetalle COD on COD.ID = SOD.idCotizacionDetalle
+                                    left JOIN enlace.USUARIOS USR ON USR.ID = COD.IDUSUARIO
+                                    WHERE  SOL.status = 'confirmada'
+                                    and CONCAT('OCC' , SOL.folio) = '{occ}';""")
+            query2 = db.excute_query(f"""select * from enlace.usuarios 
+                                        WHERE id='{idUsuario}';""")
+            query3 = db.excute_query(f"""select * from enlace.datosfiscales
+                                        WHERE idUsuario='{idUsuario}';""")
+           
+            # PERSONA FISICA  isPersonaFisica 1=Si, 0=No
+            query4 = db.excute_query(f"""select isPersonaFisica from enlace.usuarios WHERE id='{idUsuario}';;""")
             db.disconnect()
+            
+            if query and query2 and query3:
+                subtotal = 0
+                isFisica = query4[0][0]
+                name = f'{query3[0][3]} {query3[0][4]} {query3[0][5]}' if isFisica else f'{query3[0][2]}'
+                address = f'Calle {query3[0][6]} #{query3[0][7]} {query3[0][8]},  Colonia {query3[0][9]} <br> {query3[0][10]}, Estado {query3[0][12]}'
+                costo_envio = 211.00
+                for row in query:
+                    subtotal = row[8] + subtotal
+                subtotal = float(subtotal) + costo_envio
+                iva = float(subtotal) * 0.16
+                print(iva)
+                total = float(subtotal) + iva
+                
+                context = {
+                    "title":"Facturación",
+                    "result":query,
+                    "name":name,
+                    "address":address,
+                    "subtotal":subtotal,
+                    "iva":iva,
+                    "total":total,
+                    "costo_envio":costo_envio,
+                }
+
             if not query:
                 messages.success(request, f"OCC '{occ}' no encontrada.")
-        except:
-            messages.error(request, 'Ha occurrido un error')
+            if not query2:
+                messages.success(request, f"Usuario '{idUsuario}' no encontrado.")
 
-    context = {
-        "title":"Facturación",
-        "result":query,
-    }
-    return render(request, 'crm/facturacion_cliente.html', context)
+            return render(request, 'crm/facturacion_cliente.html', context)
+        
+        except Exception as e:
+            messages.error(request, f'Ha occurrido un error: {e}')
+
+    return render(request, 'crm/facturacion_cliente.html', {"title":"Facturación"})
