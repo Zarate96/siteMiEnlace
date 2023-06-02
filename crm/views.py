@@ -173,7 +173,8 @@ def facturacion_cliente(request):
                 subtotal = float(subtotal) + float(costo_envio)
                 iva = float(subtotal) * 0.16 + float(iva_envio)
                 total = float(subtotal) + iva
-                
+                now = datetime.datetime.now()
+                date = now.strftime('%d-%m-%Y')
                 context = {
                     "title":"Facturación",
                     "result":query,
@@ -186,6 +187,7 @@ def facturacion_cliente(request):
                     "occ":occ,
                     "idUsuario":idUsuario,
                     "query5":query5,
+                    "date":date,
                 }
 
             if not query:
@@ -311,7 +313,7 @@ def exportFacturacionCliente(request,occ,idUsuario):
             ws[f'N{row + 6}'] = f'${total}'
     
             #Guardamos el archivo
-            nombre_archivo =f"{occ}v3.xlsx"
+            nombre_archivo =f"{occ}.xlsx"
             response = HttpResponse(content_type="application/ms-excel") 
             contenido = "attachment; filename={0}".format(nombre_archivo)
             response["Content-Disposition"] = contenido
