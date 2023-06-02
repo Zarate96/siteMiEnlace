@@ -86,29 +86,56 @@ class Solicitudes(UserPassesTestMixin, TemplateView):
         context['myresult'] = query
         return context
 
-def occ_cliente(request):
-    query = ""
+def oce_detalle(request):
     if request.method == 'POST':
-        username = request.POST['username']
+        occ = request.POST['occ']
+        oce = request.POST['oce']
+        idUsuario = request.POST['idUsuario']
         try:
-            query = db.excute_query(f"""select distinct CONCAT( 'OCC',SOL.FOLIO) OCC_FOLIO,  SOL.FECALTA, SOL.status, SOL.ISPAGADA PAGO
-                                FROM enlace_test.solicitudes SOL
-                                inner join enlace_test.cotizacion CO on SOL.ID = CO.IdSolicitud
-                                inner join enlace_test.cotizaciondetalle COD on SOL.ID = COD.idsolicitud
-                                inner join enlace_test.solicituddetalle SOD on SOL.ID = SOD.IdSolicitud
-                                INNER JOIN enlace_test.USUARIOS USR ON USR.ID = COD.IDUSUARIO
-                                where SOL.FOLIO LIKE '%{username}%'""")
+            #OCEMEDILINK1006 OCCMEDISERV005
+            query = db.excute_query(f"""set @OCE = '{oce}';
+                                        select CONCAT('OCC' , SOL.folio) OCC,
+                                        (select CONCAT( 'OCE', CO.FOLIO)  from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = @OCE ) OCE,
+                                        SOD.partida, COD.descripcion, COD.marca, COD.empaque, COD.cantidad, COD.precioUnitario, COD.precioExtendido, COD.iva
+                                        from enlace.solicitudes SOL 
+                                        inner join enlace.solicituddetalle SOD on SOL.id = SOD.idSolicitud
+                                        inner join enlace.cotizaciondetalle COD on COD.ID = SOD.idCotizacionDetalle
+                                        inner JOIN enlace.USUARIOS USR ON USR.ID = COD.IDUSUARIO
+                                        WHERE  USR.id in (select idUsuario from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = @OCE) 
+                                        and CONCAT('OCC' , SOL.folio) = '{occ}';""")
+            query2 = db.excute_query(f"""select * from enlace.usuarios 
+                                        WHERE id='{idUsuario}';""")
+            print("DATAAAAAAAAAAAAAAA")
+            print(query)
+            print(query2)
             db.disconnect()
+            if query and query2:
+                pass
+
+            now = datetime.datetime.now()
+            date = now.strftime('%d-%m-%Y')
+            context = {
+                "title":"OCE Detalle",
+                "result":query,
+                "result2":query2,
+                "date":date,
+            }
+
             if not query:
-                messages.success(request, f"Usuario '{username}' no encontrado.")
-        except:
-            messages.error(request, 'Ha occurrido un error')
+                messages.success(request, f"Data no encontrada con OCE: '{oce}' y OCC: '{occ}'.")
+            if not query2:
+                messages.success(request, f"Usuario '{idUsuario}' no encontrado.")
+
+            return render(request, 'crm/oce_detalle.html', context)
+        
+        except Exception as e:
+            messages.error(request, f'Ha occurrido un error: {e}')
 
     context = {
-        "title":"OCC por Cliente",
-        "result":query,
+        "title":"OCE Detalle",
     }
-    return render(request, 'crm/occ_cliente.html', context)
+
+    return render(request, 'crm/oce_detalle.html', context)
 
 def costo_envio_occ(request):
     query = ""

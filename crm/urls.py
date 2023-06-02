@@ -9,7 +9,7 @@ urlpatterns = [
     path('facturacion/cliente/exportar/<str:occ>/<int:idUsuario>/', exportFacturacionCliente, name='facturacion-cliente-exportar'),
     path('usuarios/', Usuarios.as_view(), name='usuarios'),
     path('solicitudes/', Solicitudes.as_view(), name='solicitudes'),
-    path('occ-cliente/', occ_cliente, name='occ-cliente'),
+    path('oce-detalle/', oce_detalle, name='oce-detalle'),
     path('occ-costo-envio/', costo_envio_occ, name='costo-envio-occ'),
     path('test/', Test.as_view(), name='test'),
 ]
