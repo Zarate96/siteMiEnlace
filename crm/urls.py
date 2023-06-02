@@ -6,6 +6,7 @@ app_name = 'crm'
 urlpatterns = [
     path('', Crm.as_view(), name='crm'),
     path('facturacion/cliente', facturacion_cliente, name='facturacion-cliente'),
+    path('facturacion/cliente/exportar/<str:occ>/<int:idUsuario>/', exportFacturacionCliente, name='facturacion-cliente-exportar'),
     path('usuarios/', Usuarios.as_view(), name='usuarios'),
     path('solicitudes/', Solicitudes.as_view(), name='solicitudes'),
     path('occ-cliente/', occ_cliente, name='occ-cliente'),
