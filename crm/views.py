@@ -296,7 +296,7 @@ def exportFacturacionCliente(request,occ,idUsuario):
             ws.merge_cells('L9:N9')
             ws['L10'] = f'{occ}'
             ws['L10'].font = Font(bold=True)
-            ws.merge_cells('L10:L11')
+            ws.merge_cells('L10:N10')
             ws['B9'] = f'Calle {query3[0][6]} #{query3[0][7]} {query3[0][8]},  Colonia {query3[0][9]}'
             ws.merge_cells('B9:G9')
             ws['B10'] = f'{query3[0][10]}, {estado[0][0]} {query3[0][12]}'
