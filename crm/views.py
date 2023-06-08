@@ -93,15 +93,14 @@ def oce_detalle(request):
         idUsuario = request.POST['idUsuario']
         try:
             #OCEMEDILINK1006 OCCMEDISERV005
-            query = db.excute_query(f"""set @OCE = '{oce}';
-                                        select CONCAT('OCC' , SOL.folio) OCC,
-                                        (select CONCAT( 'OCE', CO.FOLIO)  from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = @OCE ) OCE,
+            query = db.excute_query(f"""select CONCAT('OCC' , SOL.folio) OCC,
+                                        (select CONCAT( 'OCE', CO.FOLIO)  from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = '{oce}') OCE,
                                         SOD.partida, COD.descripcion, COD.marca, COD.empaque, COD.cantidad, COD.precioUnitario, COD.precioExtendido, COD.iva
                                         from enlace.solicitudes SOL 
                                         inner join enlace.solicituddetalle SOD on SOL.id = SOD.idSolicitud
                                         inner join enlace.cotizaciondetalle COD on COD.ID = SOD.idCotizacionDetalle
                                         inner JOIN enlace.USUARIOS USR ON USR.ID = COD.IDUSUARIO
-                                        WHERE  USR.id in (select idUsuario from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = @OCE) 
+                                        WHERE  USR.id in (select idUsuario from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = '{oce}') 
                                         and CONCAT('OCC' , SOL.folio) = '{occ}';""")
             query2 = db.excute_query(f"""select * from enlace.usuarios 
                                         WHERE id='{idUsuario}';""")
