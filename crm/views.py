@@ -266,7 +266,7 @@ def exportFacturacionCliente(request,occ,idUsuario):
             for row in query:
                 subtotal = row[8] + subtotal
             subtotal = float(subtotal) + float(costo_envio)
-            iva = float(subtotal) * 0.16 + float(iva_envio)
+            iva = float(subtotal) * 0.16 
             total = float(subtotal) + iva
             
             #Creamos el libro de trabajo
