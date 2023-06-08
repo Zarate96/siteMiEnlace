@@ -198,7 +198,7 @@ def facturacion_cliente(request):
                 for row in query:
                     subtotal = row[8] + subtotal
                 subtotal = float(subtotal) + float(costo_envio)
-                iva = float(subtotal) * 0.16 + float(iva_envio)
+                iva = float(subtotal) * 0.16
                 total = float(subtotal) + iva
                 now = datetime.datetime.now()
                 date = now.strftime('%d-%m-%Y')
@@ -207,7 +207,7 @@ def facturacion_cliente(request):
                     "result":query,
                     "name":name,
                     "address":address,
-                    "subtotal":subtotal,
+                    "subtotal":round(subtotal, 2),
                     "iva":round(iva, 2),
                     "total":round(total, 2),
                     "costo_envio":costo_envio,
