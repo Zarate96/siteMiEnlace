@@ -8,7 +8,7 @@
             <div class="col-md-6">
                 <div class="card card-info">
                     <div class="card-header">
-                    <h3 class="card-title">Orden de complra Enlace</h3>
+                    <h3 class="card-title">Orden de compra Enlace</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -16,31 +16,31 @@
                     <div class="form-group">
                     </div>
                         <form action="{% url 'crm:oce-detalle' %}" method="post" id="oceDetalle">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-sm-6">
-                                <!-- text input -->
-                                <div class="form-group">
-                                    <label>OCE</label>
-                                    <input type="text" class="form-control" placeholder="Enter ..."  name="oce" id="oce" required>
-                                </div>
-                                </div>
-                                <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>OCC</label>
-                                    <input type="text" class="form-control" placeholder="Enter ..." name="occ" id="occ" required>
-                                </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>ID Usuario</label>
-                                        <input type="text" class="form-control" placeholder="Enter ..." name="idUsuario" id="idUsuario" required>
-                                    </div>
-                                    </div>
+                          {% csrf_token %}
+                          <div class="row">
+                            <div class="col-sm-6">
+                            <!-- text input -->
+                              <div class="form-group">
+                                  <label>OCE</label>
+                                  <input type="text" class="form-control" placeholder="Enter ..."  name="oce" id="oce" required>
+                              </div>
                             </div>
-                            <span class="input-group-append">
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                  <label>OCC</label>
+                                  <input type="text" class="form-control" placeholder="Enter ..." name="occ" id="occ" required>
+                              </div>
+                            </div>
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Id Proveedor</label>
+                                    <input type="text" class="form-control" placeholder="Enter ..." name="idProveedor" id="idProveedor" required>
+                                </div>
+                              </div>
+                          </div>
+                          <span class="input-group-append">
                             <button type="submit" class="btn btn-info btn-flat">Buscar</button>
-                            </span>
+                          </span>
                         <!-- /.card-body -->
                         </form>
                     </div>
@@ -60,48 +60,72 @@
             <!-- Main content -->
             <div class="invoice p-3 mb-3">
               <!-- title row -->
+              <!-- title row -->
               <div class="row">
                 <div class="col-12">
                   <h4>
-                    <i class="fas fa-globe"></i> Data
-                    <small class="float-right">{{ date }}
+                    <i class="fas fa-globe"></i> ORDEN DE COMPRA ENLACE
+                    <small class="float-right">{{ date }} <br>Folio: <b>{{occ}}</b> <br>REF: <b>{{oce}}</b></small>
                   </h4>
                 </div>
                 <!-- /.col -->
-            </div>
-            {{ result }}
-            {{ result2 }}
+              </div>
+              <!-- info row -->
+              <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                  <address>
+                    <strong>Proveedor: {{name}}</strong><br>
+                    {{address|safe}}<br>
+                  </address>
+                </div>
+                <!-- /.col -->
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                  
+                  <!-- <br>
+                  <b>Order ID:</b> 4F3S8J<br>
+                  <b>Payment Due:</b> 2/22/2014<br>
+                  <b>Account:</b> 968-34567 -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            
+            
               <!-- Table row -->
               <div class="row">
                 <div class="col-12 table-responsive">
                   <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>OCC</th>
+                            <th>OCE</th>
                             <th>Partida</th>
                             <th>Descripción</th>
+                            <th>Marca</th>
+                            <th>Empaque</th>
                             <th>Cantidad</th>
                             <th>Precio unitario</th>
-                            <th>Total</th>
+                            <th>Precio extendido</th>
+                            <th>I.V.A</th>
                         </tr>
                         </thead>
                         <tbody>
                             
                             {% for data in result %}
                             <tr>
+                                <td>{{data.0}}</td>
+                                <td>{{data.1}}</td>
                                 <td>{{data.2}}</td>
-                                <td>{{data.3}} {{data.4}} {{data.5}}</td>
-                                <td><span class="tag tag-success">{{data.6}}</span></td>
+                                <td>{{data.3}}</td>
+                                <td>{{data.4}}</td>
+                                <td>{{data.5}}</td>
+                                <td>{{data.6}}</td>
                                 <td>${{data.7}}</td>
                                 <td>${{data.8}}</td>
+                                <td>${{data.9}}</td>
                             </tr>
                             {% endfor %}
-                            <tr>
-                              <td></td>
-                              <td>COSTO DE ENVÍO</td>
-                              <td>1</td>
-                              <td>${{costo_envio}}</td>
-                              <td>${{costo_envio}}</td>
-                            </tr>
                         </tbody>
                   </table>
                 </div>

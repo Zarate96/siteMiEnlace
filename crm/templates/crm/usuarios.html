@@ -26,17 +26,21 @@
                       <th>Nombre</th>
                       <th>Apellido Paterno</th>
                       <th>Correo</th>
+                      <th>Lada</th>
+                      <th>Celular</th>
                     </tr>
                   </thead>
                   <tbody>
                       {% if usuarios %}
                           {% for usuario in usuarios %}
                           <tr>
-                              <td>{{usuario.0}}</td>
-                              <td>{{usuario.1}}</td>
-                              <td>{{usuario.3}}</td>
-                              <td><span class="tag tag-success">{{usuario.4}}</span></td>
-                              <td>{{usuario.6}}</td>
+                                <td>{{usuario.0}}</td>
+                                <td>{{usuario.1}}</td>
+                                <td>{{usuario.3}}</td>
+                                <td><span class="tag tag-success">{{usuario.4}}</span></td>
+                                <td>{{usuario.6}}</td>
+                                <td>{{usuario.10}}</td>
+                                <td>{{usuario.11}}</td>
                           </tr>
                           {% endfor %}
                       {% endif %}

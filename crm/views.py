@@ -79,7 +79,7 @@ class Solicitudes(UserPassesTestMixin, TemplateView):
         return self.request.user.is_superuser
         
     def get_context_data(self, *args, **kwargs):
-        query = db.excute_query("""select  * from enlace_test.solicitudes""")
+        query = db.excute_query("""select  * from enlace.solicitudes""")
         db.disconnect()
         context = super().get_context_data(*args,**kwargs)
         context['title'] = 'Solicitudes'
@@ -90,9 +90,10 @@ def oce_detalle(request):
     if request.method == 'POST':
         occ = request.POST['occ']
         oce = request.POST['oce']
-        idUsuario = request.POST['idUsuario']
+        idProveedor = request.POST['idProveedor']
+
         try:
-            #OCEMEDILINK1006 OCCMEDISERV005
+            #OCETAPERULE00140 OCCSANATORIO0036 154 160
             query = db.excute_query(f"""select CONCAT('OCC' , SOL.folio) OCC,
                                         (select CONCAT( 'OCE', CO.FOLIO)  from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = '{oce}') OCE,
                                         SOD.partida, COD.descripcion, COD.marca, COD.empaque, COD.cantidad, COD.precioUnitario, COD.precioExtendido, COD.iva
@@ -102,28 +103,42 @@ def oce_detalle(request):
                                         inner JOIN enlace.USUARIOS USR ON USR.ID = COD.IDUSUARIO
                                         WHERE  USR.id in (select idUsuario from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = '{oce}') 
                                         and CONCAT('OCC' , SOL.folio) = '{occ}';""")
-            query2 = db.excute_query(f"""select * from enlace.usuarios 
-                                        WHERE id='{idUsuario}';""")
-            print("DATAAAAAAAAAAAAAAA")
-            print(query)
+            # query2 = db.excute_query(f"""select * from enlace.usuarios 
+            #                             WHERE id='{idCliente}';""")
+            query2 = db.excute_query(f"""select * from enlace.datosfiscales
+                                        WHERE idUsuario='{idProveedor}';""")
             print(query2)
+            # PERSONA FISICA  isPersonaFisica 1=Si, 0=No
+            query3 = db.excute_query(f"""select isPersonaFisica from enlace.usuarios WHERE id='{idProveedor}';;""")
+            print(query3)
+            # ESTADO
+            idEsatdo = query2[0][11]
+            print(idEsatdo)
+            estado = db.excute_query(f"""select estado from enlace.estados WHERE id='{idEsatdo}';""")
+
             db.disconnect()
-            if query and query2:
-                pass
-
-            now = datetime.datetime.now()
-            date = now.strftime('%d-%m-%Y')
-            context = {
-                "title":"OCE Detalle",
-                "result":query,
-                "result2":query2,
-                "date":date,
-            }
-
+            if query and query2 and query3:
+                isFisica = query3[0][0]
+                name = f'{query2[0][3]} {query2[0][4]} {query2[0][5]}' if isFisica else f'{query2[0][2]}'
+                address = f'Calle {query2[0][6]} #{query2[0][7]} {query2[0][8]},  Colonia {query2[0][9]} <br> {query2[0][10]}, {estado[0][0]} {query2[0][12]} <br> RFC: <b>{query2[0][13]}</b>'
+                now = datetime.datetime.now()
+                date = now.strftime('%d-%m-%Y')
+            
             if not query:
                 messages.success(request, f"Data no encontrada con OCE: '{oce}' y OCC: '{occ}'.")
             if not query2:
-                messages.success(request, f"Usuario '{idUsuario}' no encontrado.")
+                messages.success(request, f"Proveedor '{idProveedor}' no encontrado.")
+            
+            context = {
+                "title":"OCE Detalle",
+                "result":query,
+                "proveedor":query2,
+                "date":date,
+                "name":name,
+                "address":address,
+                "occ":occ,
+                "oce":oce,
+            }
 
             return render(request, 'crm/oce_detalle.html', context)
         
@@ -183,8 +198,11 @@ def facturacion_cliente(request):
             query5 = db.excute_query(f"""select CONCAT( 'OCC',SOL.FOLIO) OCC_FOLIO, FL.alto, FL.ancho, FL.largo, FL.peso, FL.costo, FL.combustible, FL.IVA from enlace.fletesolicitud FL
                                 inner join enlace.solicitudes SOL on SOL.id = FL.idSolicitud
                                 where CONCAT('OCC' , SOL.folio) = '{occ}';'""")
-            idEsatdo = query3[0][11]
+            
+            # ESTADO
+            idEsatdo = query3[0][11]            
             estado = db.excute_query(f"""select estado from enlace.estados WHERE id='{idEsatdo}';""")
+
             db.disconnect()
             
             if query and query2 and query3:
