@@ -105,7 +105,6 @@
                             <th>Cantidad</th>
                             <th>Precio unitario</th>
                             <th>Precio extendido</th>
-                            <th>I.V.A</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -119,11 +118,38 @@
                                 <td>{{data.6}}</td>
                                 <td>${{data.7}}</td>
                                 <td>${{data.8}}</td>
-                                <td>${{data.9}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                   </table>
+                </div>
+                <!-- /.col -->
+              </div>
+              <div class="row">
+                <!-- /.col -->
+                <div class="col-6"></div>
+                <div class="col-6">
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody><tr>
+                        <th style="width:50%">SUBTOTAL:</th>
+                        <td>$00.00</td>
+                      </tr>
+                      <tr>
+                        <th>IVA (%16)</th>
+                        <td>$00.000</td>
+                      </tr>
+                      <!-- <tr>
+                        <th>Shipping:</th>
+                        <td>$5.80</td>
+                      </tr> -->
+                      <tr>
+                        <th>Total:</th>
+                        <td>$00.00</td>
+                      </tr>
+                    </tbody></table>
+                  </div>
                 </div>
                 <!-- /.col -->
               </div>
