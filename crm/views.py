@@ -79,7 +79,8 @@ class Solicitudes(UserPassesTestMixin, TemplateView):
         return self.request.user.is_superuser
         
     def get_context_data(self, *args, **kwargs):
-        query = db.excute_query("""select  * from enlace.solicitudes""")
+        query = db.excute_query("""select  * from enlace.solicitudes
+                                    order by solicitudes.fecAlta DESC;""")
         db.disconnect()
         context = super().get_context_data(*args,**kwargs)
         context['title'] = 'Solicitudes'
