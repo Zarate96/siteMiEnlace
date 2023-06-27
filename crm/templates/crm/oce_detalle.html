@@ -65,7 +65,7 @@
                 <div class="col-12">
                   <h4>
                     <i class="fas fa-globe"></i> ORDEN DE COMPRA ENLACE
-                    <small class="float-right">{{ date }} <br>Folio: <b>{{occ}}</b> <br>REF: <b>{{oce}}</b></small>
+                    <small class="float-right">{{ date }} <br>Folio: <b>{{oce}}</b> <br>REF: <b>{{occ}}</b></small>
                   </h4>
                 </div>
                 <!-- /.col -->
@@ -97,9 +97,7 @@
                 <div class="col-12 table-responsive">
                   <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th>OCC</th>
-                            <th>OCE</th>
+                        <tr>                            
                             <th>Partida</th>
                             <th>Descripción</th>
                             <th>Marca</th>
@@ -113,9 +111,7 @@
                         <tbody>
                             
                             {% for data in result %}
-                            <tr>
-                                <td>{{data.0}}</td>
-                                <td>{{data.1}}</td>
+                            <tr>                                
                                 <td>{{data.2}}</td>
                                 <td>{{data.3}}</td>
                                 <td>{{data.4}}</td>
