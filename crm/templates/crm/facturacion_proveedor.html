@@ -15,21 +15,40 @@
                     <!-- form start -->
                     <div class="form-group">
                     </div>
-                        <form action="{% url 'crm:facturacion-cliente' %}" method="post" id="facturacionCliente">
+                        <form action="{% url 'crm:facturacion-proveedor' %}" method="post" id="facturacionCliente">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-sm-6">
                                 <!-- text input -->
-                                <div class="form-group">
-                                    <label>OCC</label>
-                                    <input type="text" class="form-control" placeholder="Enter ..."  name="occ" id="occ" required>
-                                </div>
+                                  <div class="form-group">
+                                      <label>OCE</label>
+                                      <input type="text" class="form-control" placeholder="Enter ..."  name="oce" id="oce" required>
+                                  </div>
                                 </div>
                                 <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Id Cliente</label>
-                                    <input type="text" class="form-control" placeholder="Enter ..." name="idUsuario" id="idUsuario" required>
+                                  <!-- text input -->
+                                    <div class="form-group">
+                                        <label>OCC</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..."  name="occ" id="occ" required>
+                                    </div>
+                                  </div>
+                                <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label>Id Proveedor</label>
+                                      <input type="text" class="form-control" placeholder="Enter ..." name="idUsuario" id="idUsuario" required>
+                                  </div>
                                 </div>
+                                <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label>Costo de envío</label>
+                                      <input type="text" class="form-control" placeholder="Enter ..." name="costo_envio" id="costo_envio" required>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <label>Comisión</label>
+                                      <input type="text" class="form-control" placeholder="Enter ..." name="comision" id="comision" required>
+                                  </div>
                                 </div>
                             </div>
                             <span class="input-group-append">
@@ -44,7 +63,7 @@
                 {% include 'crm/includes/messages.html' %}
             {% endif %} 
         </div>
-        {% if result %}
+        {% if partida1 %}
         <!-- /.row (main row) -->
         <div class="col-12">
             <!-- <div class="callout callout-info">
@@ -58,7 +77,9 @@
                 <div class="col-12">
                   <h4>
                     <i class="fas fa-globe"></i> Mi Enlace Prefactura
-                    <small class="float-right">México, D.F. <br> {{ date }} <br>Folio: <b>{{occ}}</b></small>
+                    <small class="float-right">México, D.F. <br> {{ date }} 
+                      <!-- <br>Folio: <b>{{occ}}</b> -->
+                    </small>
                   </h4>
                 </div>
                 <!-- /.col -->
@@ -98,22 +119,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                            
-                            {% for data in result %}
                             <tr>
-                                <td>{{data.2}}</td>
-                                <td>{{data.3}} {{data.4}} {{data.5}}</td>
-                                <td><span class="tag tag-success">{{data.6}}</span></td>
-                                <td>${{data.7}}</td>
-                                <td>${{data.8}}</td>
+                                <td>1</td>
+                                <td>COMISION POR USO DE LA PLATAFORMA MIENLACE</td>
+                                <td><span class="tag tag-success">1</span></td>
+                                <td>${{partida1}}</td>
+                                <td>${{partida1}}</td>
                             </tr>
-                            {% endfor %}
                             <tr>
-                              <td></td>
+                              <td>2</td>
                               <td>COSTO DE ENVÍO</td>
                               <td>1</td>
-                              <td>${{costo_envio}}</td>
-                              <td>${{costo_envio}}</td>
+                              <td>${{partida2}}</td>
+                              <td>${{partida2}}</td>
                             </tr>
                         </tbody>
                   </table>
@@ -153,7 +171,7 @@
               <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">
-                  <a href="{% url 'crm:facturacion-cliente-exportar' occ=occ idUsuario=idUsuario %}"><button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                  <a href="{% url 'crm:facturacion-proveedor-exportar' occ=occ oce=oce idUsuario=idUsuario comision=comision envio=partida2 %}"><button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
                     <i class="fas fa-download"></i> Exportar CSV
                   </button></a>
                 </div>
