@@ -87,8 +87,6 @@ class Solicitudes(UserPassesTestMixin, TemplateView):
         context['myresult'] = query
         return context
     
-
-
 def oce_detalle(request):
     if request.method == 'POST':
         occ = request.POST['occ']
@@ -121,6 +119,13 @@ def oce_detalle(request):
 
             db.disconnect()
             if query and query2 and query3:
+                subtotal_oce = 0
+                iva_oce = 0
+                for row in query:
+                    subtotal_oce = row[8] + subtotal_oce
+                for row in query:
+                    iva_oce = row[9] + iva_oce
+                total_oce = subtotal_oce + iva_oce
                 isFisica = query3[0][0]
                 name = f'{query2[0][3]} {query2[0][4]} {query2[0][5]}' if isFisica else f'{query2[0][2]}'
                 address = f'Calle {query2[0][6]} #{query2[0][7]} {query2[0][8]},  Colonia {query2[0][9]} <br> {query2[0][10]}, {estado[0][0]} {query2[0][12]} <br> RFC: <b>{query2[0][13]}</b>'
@@ -141,6 +146,9 @@ def oce_detalle(request):
                 "address":address,
                 "occ":occ,
                 "oce":oce,
+                "subtotal_oce":subtotal_oce,
+                "iva_oce":iva_oce,
+                "total_oce":total_oce,
             }
 
             return render(request, 'crm/oce_detalle.html', context)
