@@ -1,55 +1,19 @@
-{% extends 'crm/baseCrm.html' %}
-{% load tz %}
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle {{oce}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+    
+
 <section class="content">
     <div class="container-fluid">
         <!-- Main row -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-info">
-                    <div class="card-header">
-                    <h3 class="card-title">Orden de compra Enlace</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                    <!-- form start -->
-                    <div class="form-group">
-                    </div>
-                        <form action="{% url 'crm:oce-detalle' %}" method="post" id="oceDetalle">
-                          {% csrf_token %}
-                          <div class="row">
-                            <div class="col-sm-6">
-                            <!-- text input -->
-                              <div class="form-group">
-                                  <label>OCE</label>
-                                  <input type="text" class="form-control" placeholder="Enter ..."  name="oce" id="oce" required>
-                              </div>
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label>OCC</label>
-                                  <input type="text" class="form-control" placeholder="Enter ..." name="occ" id="occ" required>
-                              </div>
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label>Id Proveedor</label>
-                                  <input type="text" class="form-control" placeholder="Enter ..." name="idProveedor" id="idProveedor" required>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="input-group-append">
-                            <button type="submit" class="btn btn-info btn-flat">Buscar</button>
-                          </span>
-                        <!-- /.card-body -->
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {% if messages %}
-                {% include 'crm/includes/messages.html' %}
-            {% endif %} 
-        </div>
         {% if result %}
         <!-- /.row (main row) -->
         <div class="col-12">
@@ -159,13 +123,6 @@
                 </div>
                 <!-- /.col -->
               </div>
-              <div class="row no-print">
-                <div class="col-12">
-                  <a href="{% url 'crm:oce-exportar-pdf' occ=occ oce=oce idProveedor=idProveedor %}"><button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-download"></i> Exportar CSV
-                  </button></a>
-                </div>
-              </div>
             </div>
             <!-- /.invoice -->
           </div>
@@ -173,4 +130,5 @@
           {% endif %}
     </div><!-- /.container-fluid -->
 </section>
-{% endblock %}
+</body>
+</html>

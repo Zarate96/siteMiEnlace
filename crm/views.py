@@ -3,6 +3,12 @@ import datetime
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from openpyxl.worksheet.table import Table, TableStyleInfo
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+
+from weasyprint import HTML
+from weasyprint.text.fonts import FontConfiguration
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -108,13 +114,13 @@ def oce_detalle(request):
             #                             WHERE id='{idCliente}';""")
             query2 = db.excute_query(f"""select * from enlace.datosfiscales
                                         WHERE idUsuario='{idProveedor}';""")
-            print(query2)
+            
             # PERSONA FISICA  isPersonaFisica 1=Si, 0=No
             query3 = db.excute_query(f"""select isPersonaFisica from enlace.usuarios WHERE id='{idProveedor}';""")
-            print(query3)
+            
             # ESTADO
             idEsatdo = query2[0][11]
-            print(idEsatdo)
+            
             estado = db.excute_query(f"""select estado from enlace.estados WHERE id='{idEsatdo}';""")
 
             db.disconnect()
@@ -141,6 +147,7 @@ def oce_detalle(request):
                 "title":"OCE Detalle",
                 "result":query,
                 "proveedor":query2,
+                "idProveedor":idProveedor,
                 "date":date,
                 "name":name,
                 "address":address,
@@ -161,6 +168,85 @@ def oce_detalle(request):
     }
 
     return render(request, 'crm/oce_detalle.html', context)
+
+def export_pdf_oce_detalle(request,occ,oce,idProveedor):
+    try:
+        #OCETAPERULE00140 OCCSANATORIO0036 154 160
+        query = db.excute_query(f"""select CONCAT('OCC' , SOL.folio) OCC,
+                                    (select CONCAT( 'OCE', CO.FOLIO)  from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = '{oce}') OCE,
+                                    SOD.partida, COD.descripcion, COD.marca, COD.empaque, COD.cantidad, COD.precioUnitario, COD.precioExtendido, COD.iva
+                                    from enlace.solicitudes SOL 
+                                    inner join enlace.solicituddetalle SOD on SOL.id = SOD.idSolicitud
+                                    inner join enlace.cotizaciondetalle COD on COD.ID = SOD.idCotizacionDetalle
+                                    inner JOIN enlace.USUARIOS USR ON USR.ID = COD.IDUSUARIO
+                                    WHERE  USR.id in (select idUsuario from enlace.cotizacion CO where CONCAT( 'OCE', CO.FOLIO) = '{oce}') 
+                                    and CONCAT('OCC' , SOL.folio) = '{occ}';""")
+        # query2 = db.excute_query(f"""select * from enlace.usuarios 
+        #                             WHERE id='{idCliente}';""")
+        query2 = db.excute_query(f"""select * from enlace.datosfiscales
+                                    WHERE idUsuario='{idProveedor}';""")
+        
+        # PERSONA FISICA  isPersonaFisica 1=Si, 0=No
+        query3 = db.excute_query(f"""select isPersonaFisica from enlace.usuarios WHERE id='{idProveedor}';""")
+        
+        # ESTADO
+        idEsatdo = query2[0][11]
+        
+        estado = db.excute_query(f"""select estado from enlace.estados WHERE id='{idEsatdo}';""")
+
+        db.disconnect()
+        if query and query2 and query3:
+            subtotal_oce = 0
+            iva_oce = 0
+            for row in query:
+                subtotal_oce = row[8] + subtotal_oce
+            for row in query:
+                iva_oce = row[9] + iva_oce
+            total_oce = subtotal_oce + iva_oce
+            isFisica = query3[0][0]
+            name = f'{query2[0][3]} {query2[0][4]} {query2[0][5]}' if isFisica else f'{query2[0][2]}'
+            address = f'Calle {query2[0][6]} #{query2[0][7]} {query2[0][8]},  Colonia {query2[0][9]} <br> {query2[0][10]}, {estado[0][0]} {query2[0][12]} <br> RFC: <b>{query2[0][13]}</b>'
+            now = datetime.datetime.now()
+            date = now.strftime('%d-%m-%Y')
+        
+        if not query:
+            messages.success(request, f"Data no encontrada con OCE: '{oce}' y OCC: '{occ}'.")
+        if not query2:
+            messages.success(request, f"Proveedor '{idProveedor}' no encontrado.")
+        
+        context = {
+            "title":"OCE Detalle",
+            "result":query,
+            "proveedor":query2,
+            "date":date,
+            "name":name,
+            "address":address,
+            "occ":occ,
+            "oce":oce,
+            "subtotal_oce":subtotal_oce,
+            "iva_oce":iva_oce,
+            "total_oce":total_oce,
+        }
+
+        html = render_to_string("crm/report/report-pdf.html", context)
+
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = "inline; report.pdf"
+
+        font_config = FontConfiguration()
+        HTML(string=html).write_pdf(response, font_config=font_config)
+
+        return response
+        
+    except Exception as e:
+        messages.error(request, f'Ha occurrido un error: {e}')
+
+    context = {
+        "title":"OCE Detalle",
+    }
+    
+    return render(request, 'crm/oce_detalle.html', context)
+    
 
 def costo_envio_occ(request):
     query = ""
@@ -217,6 +303,7 @@ def facturacion_cliente(request):
             db.disconnect()
             
             if query and query2 and query3:
+                iva_factura = 0
                 subtotal = 0
                 isFisica = query4[0][0]
                 name = f'{query3[0][3]} {query3[0][4]} {query3[0][5]}' if isFisica else f'{query3[0][2]}'
@@ -225,9 +312,11 @@ def facturacion_cliente(request):
                 iva_envio = query5[0][7]
                 for row in query:
                     subtotal = row[8] + subtotal
+                for row in query:
+                    iva_factura = row[9] + iva_factura
+                iva_factura = float(iva_factura) + float(iva_envio)
                 subtotal = float(subtotal) + float(costo_envio)
-                iva = float(subtotal) * 0.16
-                total = float(subtotal) + iva
+                total = float(subtotal) + iva_factura
                 now = datetime.datetime.now()
                 date = now.strftime('%d-%m-%Y')
                 context = {
@@ -236,9 +325,9 @@ def facturacion_cliente(request):
                     "name":name,
                     "address":address,
                     "subtotal":round(subtotal, 2),
-                    "iva":round(iva, 2),
                     "total":round(total, 2),
                     "costo_envio":costo_envio,
+                    "iva_factura":iva_factura,
                     "occ":occ,
                     "idUsuario":idUsuario,
                     "query5":query5,

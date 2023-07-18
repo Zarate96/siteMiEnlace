@@ -12,6 +12,7 @@ urlpatterns = [
     path('usuarios/', Usuarios.as_view(), name='usuarios'),
     path('solicitudes/', Solicitudes.as_view(), name='solicitudes'),
     path('oce-detalle/', oce_detalle, name='oce-detalle'),
+    path('oce-detalle/exportar/<str:occ>/<str:oce>/<int:idProveedor>', export_pdf_oce_detalle, name="oce-exportar-pdf" ),
     path('occ-costo-envio/', costo_envio_occ, name='costo-envio-occ'),
     path('test/', Test.as_view(), name='test'),
 ]
